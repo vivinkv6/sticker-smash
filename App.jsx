@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   text: {
+    textTransform:'uppercase',
     color: "#ffffff",
     fontSize: 40,
     fontWeight: "bold",
     fontStyle: "italic",
-    textShadowColor: "#04888c",
-    textShadowOffset: { width: 3, height: 1 },
-    textShadowRadius: 20,
+    textShadowColor: "#64cdd1",
+    textShadowOffset: { width: 2, height: 1 },
+    textShadowRadius: 10,
     letterSpacing: 2,
   },
 });
