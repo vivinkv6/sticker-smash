@@ -8,16 +8,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Sticker Smash</Text>
-
       <Images />
-
       <View>
         <Button1 />
       </View>
       <View>
         <Button2 />
       </View>
-
       <StatusBar style="auto" />
     </View>
   );
@@ -32,7 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   text: {
-    textTransform:'uppercase',
+    textTransform: "uppercase",
     color: "#ffffff",
     fontSize: 40,
     fontWeight: "bold",

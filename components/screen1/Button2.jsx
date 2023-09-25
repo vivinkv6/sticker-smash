@@ -1,15 +1,17 @@
-import { View, Text,StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 export default function Button2() {
   return (
     <View>
-      <Text style={styles.btn}> Use this Photo</Text>
+      <Pressable onPress={() => alert("You Click Use this photo button")}>
+        <Text style={styles.btn}> Use this Photo</Text>
+      </Pressable>
     </View>
   );
 }
 
-const styles=StyleSheet.create({
-  btn:{
-    color:'#ffffff'
-  }
-})
+const styles = StyleSheet.create({
+  btn: {
+    color: "#ffffff",
+  },
+});
