@@ -4,14 +4,14 @@ import CircleButton from "./CircleButton";
 import IconButton1 from "./IconButton1";
 import IconButton2 from "./IconButton2";
 
-export default function AddIconButton() {
+export default function AddIconButton({setIsVisible}) {
   return (
     <View style={styles.container}>
       <View>
         <IconButton1 />
       </View>
       <View>
-        <CircleButton />
+        <CircleButton setIsVisible={setIsVisible}/>
       </View>
       <View>
         <IconButton2 />

@@ -1,16 +1,20 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function CircleButton() {
+export default function CircleButton({setIsVisible}) {
   return (
     <View style={styles.container}>
+     
       <View style={styles.iconContainer}>
+      <Pressable onPress={()=>setIsVisible(true)}>
         <MaterialIcons
           name="add"
           color="#000000"
           size={50}
         />
+        </Pressable>
       </View>
+      
     </View>
   );
 }

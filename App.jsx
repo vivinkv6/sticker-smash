@@ -6,10 +6,12 @@ import Button2 from "./components/screen1/Button2";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import AddIconButton from "./components/showAppOptions/AddIconButton";
+import EmojiPicker from "./components/modal/EmojiPicker";
 
 export default function App() {
   const [imageSelect, setImageSelect] = useState(undefined);
   const [showAppOption,setShowAppOption]=useState(false);
+  const [isVisible,setIsVisible]=useState(false);
 
   //function for pick an image from gallery and display it on image component
 
@@ -33,7 +35,7 @@ export default function App() {
       <Text style={styles.text}>Sticker Smash</Text>
       <Images imageSelect={imageSelect} />
       {showAppOption ? (
-       <AddIconButton/>
+       <AddIconButton setIsVisible={setIsVisible}/>
       ):(
         <>
         <View>
@@ -41,10 +43,11 @@ export default function App() {
       </View>
       <View>
         <Button2 setShowAppOption={setShowAppOption}/>
+      
       </View>
       </>
       )}
-     
+      <EmojiPicker isVisible={isVisible} setIsVisible={setIsVisible}/>
       <StatusBar style="auto" />
     </View>
   );
