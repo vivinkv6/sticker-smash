@@ -2,11 +2,14 @@ import { View, Image,StyleSheet } from "react-native";
 
 const image=require('../../assets/images/background-image.png');
 
-export default function Images() {
+export default function Images({imageSelect}) {
+
+  const checkImage=imageSelect ? {uri:imageSelect}:image;
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-    <Image source={image} style={styles.image} accessibilityLabel="Image Not Found" />
+    <Image source={checkImage} style={styles.image} accessibilityLabel="Image Not Found" />
     </View>
     </View>
   );

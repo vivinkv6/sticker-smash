@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 const icon = require("../../assets/gallery.png");
-export default function Button1() {
+export default function Button1({ pickImage }) {
   return (
     <View style={styles.parentContainer}>
-      <Pressable onPress={()=>alert("You Click Choose Photo Button")}>
+      <Pressable onPress={() =>pickImage()}>
         <View style={styles.buttonContainer}>
           <FontAwesome
             name="picture-o"

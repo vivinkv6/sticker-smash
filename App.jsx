@@ -3,14 +3,33 @@ import { StyleSheet, Text, View } from "react-native";
 import Images from "./components/screen1/Images";
 import Button1 from "./components/screen1/Button1";
 import Button2 from "./components/screen1/Button2";
+import * as ImagePicker from "expo-image-picker";
+import { useState } from "react";
 
 export default function App() {
+  const [imageSelect, setImageSelect] = useState(undefined);
+
+  //function for pick an image from gallery and display it on image component
+
+  const pickImage=async()=> {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImageSelect(result.assets[0].uri);
+    } else {
+      alert("Image Not Selected");
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Sticker Smash</Text>
-      <Images />
+      <Images imageSelect={imageSelect} />
       <View>
-        <Button1 />
+        <Button1 pickImage={pickImage} />
       </View>
       <View>
         <Button2 />
