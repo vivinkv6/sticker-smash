@@ -18,7 +18,10 @@ export default function Images({imageSelect}) {
 
 const styles=StyleSheet.create({
   container:{
-    width:300,
+    width:'100%',
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center',
     height:400,
   },
   imageContainer:{
