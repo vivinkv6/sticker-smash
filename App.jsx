@@ -7,15 +7,18 @@ import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import AddIconButton from "./components/showAppOptions/AddIconButton";
 import EmojiPicker from "./components/modal/EmojiPicker";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 
 export default function App() {
   const [imageSelect, setImageSelect] = useState(undefined);
-  const [showAppOption,setShowAppOption]=useState(false);
-  const [isVisible,setIsVisible]=useState(false);
+  const [showAppOption, setShowAppOption] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [emoji,setEmoji]=useState(undefined);
 
   //function for pick an image from gallery and display it on image component
 
-  const pickImage=async()=> {
+  const pickImage = async () => {
     setShowAppOption(false);
     const result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -28,28 +31,28 @@ export default function App() {
     } else {
       alert("Image Not Selected");
     }
-  }
+  };
 
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
       <Text style={styles.text}>Sticker Smash</Text>
-      <Images imageSelect={imageSelect} />
+     
+      <Images imageSelect={imageSelect} emoji={emoji} />
       {showAppOption ? (
-       <AddIconButton setIsVisible={setIsVisible}/>
-      ):(
+        <AddIconButton setIsVisible={setIsVisible} />
+      ) : (
         <>
-        <View>
-        <Button1 pickImage={pickImage} />
-      </View>
-      <View>
-        <Button2 setShowAppOption={setShowAppOption}/>
-      
-      </View>
-      </>
+          <View>
+            <Button1 pickImage={pickImage} />
+          </View>
+          <View>
+            <Button2 setShowAppOption={setShowAppOption} />
+          </View>
+        </>
       )}
-      <EmojiPicker isVisible={isVisible} setIsVisible={setIsVisible}/>
+      <EmojiPicker isVisible={isVisible} setIsVisible={setIsVisible} setEmoji={setEmoji}/>
       <StatusBar style="auto" />
-    </View>
+    </GestureHandlerRootView>
   );
 }
 

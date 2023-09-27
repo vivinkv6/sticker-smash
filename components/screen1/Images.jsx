@@ -1,14 +1,16 @@
 import { View, Image,StyleSheet } from "react-native";
+import EmojiSticker from "../EmojiSticker";
 
 const image=require('../../assets/images/background-image.png');
 
-export default function Images({imageSelect}) {
+export default function Images({imageSelect,emoji}) {
 
   const checkImage=imageSelect ? {uri:imageSelect}:image;
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
+      {emoji && <EmojiSticker emoji={emoji}/>}
     <Image source={checkImage} style={styles.image} accessibilityLabel="Image Not Found" />
     </View>
     </View>

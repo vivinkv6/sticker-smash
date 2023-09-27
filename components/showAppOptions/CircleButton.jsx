@@ -1,20 +1,14 @@
 import { View, StyleSheet, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function CircleButton({setIsVisible}) {
+export default function CircleButton({ setIsVisible }) {
   return (
     <View style={styles.container}>
-     
       <View style={styles.iconContainer}>
-      <Pressable onPress={()=>setIsVisible(true)}>
-        <MaterialIcons
-          name="add"
-          color="#000000"
-          size={50}
-        />
+        <Pressable onPress={() => setIsVisible(true)}>
+          <MaterialIcons name="add" color="#000000" size={50} />
         </Pressable>
       </View>
-      
     </View>
   );
 }
@@ -31,7 +25,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   iconContainer: {
     height: 80,
@@ -40,6 +34,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
 });
