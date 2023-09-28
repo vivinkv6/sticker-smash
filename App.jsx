@@ -114,7 +114,7 @@ export default function App() {
         setEmoji={setEmoji}
       />
 
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </GestureHandlerRootView>
   );
 }
