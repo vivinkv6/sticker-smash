@@ -37,7 +37,6 @@ function EmojiSticker({ emoji }) {
     //variables methods -> drag emoji through on image
     const translateX=useSharedValue(0);
     const translateY=useSharedValue(0);
-    console.log({translateX,translateY});
 
   const onDrag=useAnimatedGestureHandler({
     onStart:(event,context)=>{

@@ -6,6 +6,7 @@ const image=require('../../assets/images/background-image.png');
 export default function Images({imageSelect,emoji}) {
 
   const checkImage=imageSelect ? {uri:imageSelect}:image;
+  console.log(emoji);
 
   return (
     <View style={styles.container}>

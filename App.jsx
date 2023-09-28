@@ -1,20 +1,73 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Platform } from "react-native";
 import Images from "./components/screen1/Images";
 import Button1 from "./components/screen1/Button1";
 import Button2 from "./components/screen1/Button2";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
+import {useRef, useState } from "react";
 import AddIconButton from "./components/showAppOptions/AddIconButton";
 import EmojiPicker from "./components/modal/EmojiPicker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
+import * as MediaLibrary from "expo-media-library";
+import { captureRef } from "react-native-view-shot";
+import DomToImage from "dom-to-image";
 
 export default function App() {
   const [imageSelect, setImageSelect] = useState(undefined);
   const [showAppOption, setShowAppOption] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [emoji,setEmoji]=useState(undefined);
+  const [emoji, setEmoji] = useState(undefined);
+
+  //refresh or clear the emoji from the image
+  const refresh = () => {
+    setEmoji(undefined);
+  };
+
+  //save the image to mobile
+  const [status, permission] = MediaLibrary.usePermissions();
+
+  if (status == null) {
+    permission();
+  }
+
+  const imageRef = useRef();
+
+  // save image in gallery
+
+  const save = async () => {
+    if (Platform.OS !== "web") {
+      try {
+        const imageUri = await captureRef(imageRef, {
+          height: 400,
+          quality: 1,
+        });
+        await MediaLibrary.saveToLibraryAsync(imageUri);
+
+        if (imageUri) {
+          alert("Saved");
+        } else {
+          alert("Failed to Save");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const imageUri = await DomToImage.toJpeg(imageRef, {
+          quality: 0.95,
+          width: 320,
+          height: 440,
+        });
+
+        let link = document.createElement("a");
+        link.download = "sticker-smash.jpeg";
+        link.href = imageUri;
+        link.click();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   //function for pick an image from gallery and display it on image component
 
@@ -36,10 +89,15 @@ export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <Text style={styles.text}>Sticker Smash</Text>
-     
-      <Images imageSelect={imageSelect} emoji={emoji} />
+      <View ref={imageRef} collapsable={false} style={styles.childContainer}>
+        <Images imageSelect={imageSelect} emoji={emoji} />
+      </View>
       {showAppOption ? (
-        <AddIconButton setIsVisible={setIsVisible} />
+        <AddIconButton
+          setIsVisible={setIsVisible}
+          refresh={refresh}
+          save={save}
+        />
       ) : (
         <>
           <View>
@@ -50,7 +108,12 @@ export default function App() {
           </View>
         </>
       )}
-      <EmojiPicker isVisible={isVisible} setIsVisible={setIsVisible} setEmoji={setEmoji}/>
+      <EmojiPicker
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        setEmoji={setEmoji}
+      />
+
       <StatusBar style="auto" />
     </GestureHandlerRootView>
   );
@@ -63,6 +126,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#171716",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+  childContainer: {
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "space-around",
   },
   text: {
     textTransform: "uppercase",
